@@ -16,7 +16,7 @@
 
 int main(int argc, char **argv) {
 
-/*
+	// command line input
     const char *fontfile;
     const char *text;
 
@@ -25,9 +25,7 @@ int main(int argc, char **argv) {
         fprintf (stderr, "usage: hello-harfbuzz font-file.ttf text\n");
         exit (1);
     }
-*/
-
-    /*
+    
     fontfile = argv[1];
     text = argv[2];
 
@@ -46,17 +44,17 @@ int main(int argc, char **argv) {
     //Create hb-ft font
     hb_font_t *hb_font;
     hb_font = hb_ft_font_create (ft_face, NULL);
-    */
+    
 
     //Create hb-buffer and populate
     hb_buffer_t *hb_buffer;
     hb_buffer = hb_buffer_create ();
-    /*
+    
     hb_buffer_add_utf8 (hb_buffer, text, -1, 0, -1);
     hb_buffer_guess_segment_properties (hb_buffer);
-    */
+    
 
-    /*
+    
     //shape text
     hb_shape (hb_font, hb_buffer, NULL, 0);
 
@@ -106,17 +104,15 @@ int main(int argc, char **argv) {
             current_y += pos[i].y_advance / 64.;
         }
     }
-    */
+    
 
     //free buffer
     hb_buffer_destroy (hb_buffer);
-
-/*
     hb_font_destroy (hb_font);
 
     FT_Done_Face (ft_face);
     FT_Done_FreeType (ft_library);
-*/
+
 }
 
 
