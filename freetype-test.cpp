@@ -71,8 +71,8 @@ int main(int argc, char **argv) {
     {
         hb_codepoint_t gid   = info[i].codepoint;
         unsigned int cluster = info[i].cluster;
-        double x_advance = pos[i].x_advance / 64.;
-        double y_advance = pos[i].y_advance / 64.;
+        double x_advance = pos[i].x_advance / 64.;  // convert fixed point to float point, lossless
+        double y_advance = pos[i].y_advance / 64.;  // need to careful handle multiplication and division
         double x_offset  = pos[i].x_offset / 64.;
         double y_offset  = pos[i].y_offset / 64.;
 
