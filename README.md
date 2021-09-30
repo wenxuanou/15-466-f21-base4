@@ -1,10 +1,10 @@
-# (TODO: your game's title)
+# An advanture
 
-Author: (TODO: your name)
+Author: Wenxuan Ou
 
 Design: (TODO: In two sentences or fewer, describe what is new and interesting about your game.)
 
-Text Drawing: (TODO: how does the text drawing in this game work? Is text precomputed? Rendered at runtime? What files or utilities are involved?)
+Text Drawing: The ttf font file stores glyph for each characrters. When a text needs to be print, freetype library will be used to find the corresponding glyph in the ttf file, and then the text will be rendered and printed in OpenGL. 
 
 Screen Shot:
 
@@ -14,7 +14,7 @@ How To Play:
 
 (TODO: describe the controls and (if needed) goals/strategy.)
 
-Sources: (TODO: list a source URL for any assets you did not create yourself. Make sure you have a license for the asset.)
+Sources: Text font source: https://www.fontsquirrel.com/fonts/list/popular
 
 This game was built with [NEST](NEST.md).
 
