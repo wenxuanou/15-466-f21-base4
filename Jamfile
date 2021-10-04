@@ -137,7 +137,9 @@ if $(OS) = NT { #Windows
 
 #Store the names of various .cpp files to build into variables:
 GAME_NAMES =
-	PlayMode
+	AdvantureMode
+	TextDrawer
+	#PlayMode
 	main
 	LitColorTextureProgram
 	#ColorTextureProgram #not used right now, but you might want it

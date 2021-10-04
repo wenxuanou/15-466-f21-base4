@@ -4,6 +4,9 @@
 //The 'PlayMode' mode plays the game:
 #include "PlayMode.hpp"
 
+//My game mode
+#include "AdvantureMode.hpp"
+
 //For asset loading:
 #include "Load.hpp"
 
@@ -66,7 +69,7 @@ int main(int argc, char **argv) {
 
 	//create window:
 	SDL_Window *window = SDL_CreateWindow(
-		"gp21 game4: choice-based game", //TODO: remember to set a title for your game!
+		"An Advanture", //TODO: remember to set a title for your game!
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		1280, 720, //TODO: modify window size if you'd like
 		SDL_WINDOW_OPENGL
@@ -112,7 +115,8 @@ int main(int argc, char **argv) {
 	call_load_functions();
 
 	//------------ create game mode + make current --------------
-	Mode::set_current(std::make_shared< PlayMode >());
+//	Mode::set_current(std::make_shared< PlayMode >());
+	Mode::set_current(std::make_shared< AdvantureMode >());
 
 	//------------ main loop ------------
 

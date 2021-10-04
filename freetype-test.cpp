@@ -8,14 +8,7 @@
 #include <hb.h>
 #include <hb-ft.h>
 
-// OpenGL Headers
-/*
-#include <windows.h>                                      // (The GL Headers Need It)
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
- */
-
+#include <iostream>
 
 #define FONT_SIZE 36
 #define MARGIN (FONT_SIZE * .5)
@@ -86,26 +79,19 @@ int main(int argc, char **argv) {
 	else
 		width  += FONT_SIZE;
 
-	
-	//TODO: set up opengl
-	/*
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_DOUBLE);
-	glutInitWindowSize(800,600);
-	glutCreateWindow("Hello World");
-	setup();
-	glutDisplayFunc(display);
-	glutMainLoop();
-	 */
-	
+	printf ("entire string: width=%g, height=%g\n",
+			width, height);
+
 	
 	//set up free type rasterization
 	if ((ft_error = FT_Set_Pixel_Sizes (ft_face, 0, 16)))	// set pixel size, need integer width and height
 		abort();
 	
 	// draw each character
+	// ft_face has the entiro glyph, hb_buffer tells where to find wanted character
 	double current_x = 0;	// current character position
 	double current_y = 0;
+	
 	for(unsigned int i = 0; i < len; i++){
 		//get glyph info
 		hb_codepoint_t gid   = info[i].codepoint;	// get glyph id, uint32_t -> unsigned int
@@ -113,21 +99,16 @@ int main(int argc, char **argv) {
 		double x_position = current_x + pos[i].x_offset / 64.;
 		double y_position = current_y + pos[i].y_offset / 64.;
 		
-		if((ft_error = FT_Load_Glyph(ft_face, gid, FT_LOAD_DEFAULT))){abort();}
-		if((ft_error = FT_Render_Glyph(ft_face->glyph, FT_RENDER_MODE_NORMAL))){abort();}
-		
 		FT_GlyphSlot slot = ft_face->glyph;	// access bitmap, format changed to bitmap
 	    FT_Bitmap bitmap = slot->bitmap;
 		
-		// bitmap for current character
-		/*
-		glBitmap(width, height,
-				 x_position, y_position,
-				 
-				 GL_UNSIGNED_BYTE,
-				 bitmap);
-		*/
+		if((ft_error = FT_Load_Glyph(ft_face, gid, FT_LOAD_DEFAULT))){abort();}
+		if((ft_error = FT_Render_Glyph(ft_face->glyph, FT_RENDER_MODE_NORMAL))){abort();}
 		   
+		
+		
+		
+		
 		
 		char glyphname[32];
 			  hb_font_get_glyph_name (hb_font, gid, glyphname, sizeof (glyphname));
@@ -141,13 +122,39 @@ int main(int argc, char **argv) {
 		printf ("current pos: x= %g, y=%g \n",
 				current_x, current_y);
 		
+
+		
 		// update position
 		current_x += pos[i].x_advance / 64.;
 		current_y += pos[i].y_advance / 64.;
 	}
 	
 	
+	/*
+	{
+		FT_Bitmap const &bitmap = ft_face->glyph->bitmap;
 
+		std::cout << "Bitmap (" << bitmap.width << "x" << bitmap.rows << "):\n";
+		std::cout << "  pitch is " << bitmap.pitch << "\n";
+		std::cout << "  pixel_mode is " << int32_t(bitmap.pixel_mode) << "; num_grays is " << bitmap.num_grays << "\n";
+		if (bitmap.pixel_mode == FT_PIXEL_MODE_GRAY && bitmap.num_grays == 256 && bitmap.pitch >= 0) {
+			for (uint32_t row = 0; row < bitmap.rows; ++row) {
+				std::cout << "   ";
+				for (uint32_t col = 0; col < bitmap.width; ++col) {
+					uint8_t val = bitmap.buffer[row * std::abs(bitmap.pitch) + col];
+					if (val < 128) std::cout << '.';
+					else std::cout << '#';
+				}
+				std::cout << '\n';
+			}
+		} else {
+			std::cout << "  (bitmap is not FT_PIXEL_MODE_GRAY with 256 levels and upper-left origin, not dumping)" << "\n";
+		}
+		std::cout.flush();
+	}
+	 */
+	
+	
     //free buffer
     hb_buffer_destroy (hb_buffer);
     hb_font_destroy (hb_font);
@@ -157,27 +164,5 @@ int main(int argc, char **argv) {
 
 }
 
-
-
-/*
-text render api:
-
-1. render before game, like load, look up
-Load< T > textstream
-
-for(i){
-    if(textstream[i].name == "paragraph 1"){
-        draw(textstream[i], position)
-    }
-
-}
-
-2. render in game, read string and render at location
-text.renderer("string", position);
-
-*think of glypth, ligatures / non-ligatures
-
-
-*/
 
 
