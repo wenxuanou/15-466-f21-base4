@@ -8,13 +8,13 @@ Text Drawing: The ttf font file stores glyph for each characrters. When a text n
 
 Screen Shot:
 
-![Screen Shot](screenshot.png)
+![Screen Shot](gameplay.png)
 
 How To Play:
 
 Click to make your choice.
 
-Sources: Text font source: https://www.fontsquirrel.com/fonts/list/popular
+Sources: Text font source (Pacifico): https://www.fontsquirrel.com/fonts/list/popular
 
 Note: Game not fininshed.
 
