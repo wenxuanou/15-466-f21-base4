@@ -16,5 +16,7 @@ Click to make your choice.
 
 Sources: Text font source: https://www.fontsquirrel.com/fonts/list/popular
 
+Note: Game not fininshed.
+
 This game was built with [NEST](NEST.md).
 
