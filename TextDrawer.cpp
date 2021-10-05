@@ -195,6 +195,8 @@ void TextDrawer::drawText(std::string const &text,
 		FT_GlyphSlot slot = ft_face->glyph;	// access bitmap, format changed to bitmap
 		FT_Bitmap bitmap = slot->bitmap;	// slot->bitmap_top/bitmap_left tells bitmap location relative to
 		
+		//TODO: HOW DO I CONVERT BITMAP TO TEXTURE????????
+		
 		// update VBO for each character, actual drawing position
 		float w = pos[i].x_advance;
 		float h = pos[i].y_advance;
@@ -231,6 +233,8 @@ void TextDrawer::drawText(std::string const &text,
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		
 //		CharTexBuff.push_back(texture);
+		
+		//TODO: how do i draw the rectangle with texture?
 		
 		// render glyph texture over quad
 //		glBindTexture(GL_TEXTURE_2D, texture);
